@@ -83,11 +83,8 @@ if uploaded_file is not None:
         st.subheader("Podgląd wygenerowanego grafiku")
         st.caption("(!) Oznacza osobę dobraną awaryjnie (krótki odstęp między zmianami).")
         st.dataframe(df[['DATA', 'ZMIANA', 'PRZYPISANI_PRACOWNICY']], use_container_width=True)
-        
-        st.subheader("Suma zmian w miesiącu")
-        st.bar_chart(pd.Series(liczniki))
 
-        # Przygotowanie Excela do pobrania
+         # Przygotowanie Excela do pobrania
         output = io.BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             df.to_excel(writer, index=False, sheet_name='Grafik_Wynik')
@@ -98,3 +95,8 @@ if uploaded_file is not None:
             file_name="gotowy_grafik.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
+        st.subheader("Suma zmian w miesiącu")
+        st.bar_chart(pd.Series(liczniki))
+
+       
